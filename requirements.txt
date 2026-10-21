@@ -1,2 +1,9 @@
 pandas
 pyyaml
+python-dotenv
+networkx
+chromadb
+sentence-transformers
+langchain
+langgraph
+langchain-groq
