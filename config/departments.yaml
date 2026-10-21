@@ -1,0 +1,76 @@
+# Rules that turn a job title into a department.
+# 1. If the exact title is under "overrides", use that.
+# 2. Otherwise, check rules top to bottom. The FIRST match wins.
+# 3. If nothing matches, the department is "Other".
+
+overrides:
+  Salesforce Application Administrator: IT & Security
+
+rules:
+  - department: Legal
+    keywords: [counsel, legal]
+
+  - department: Customer Service
+    keywords: [customer service, customer experience]
+
+  - department: Customer Success
+    keywords: [customer success, launch success, client partner, strategic client,
+               client management, customer strategy, customer advocacy]
+
+  - department: Technical Services
+    keywords: [technical services]
+
+  - department: Linguistics
+    keywords: [linguist, whiq]
+
+  - department: People (HR)
+    keywords: [hris, hx, human experience, talent, recruit, benefits, total rewards,
+               compensation, people, learning and development, workplace experience,
+               employer brand, internal communications]
+
+  - department: Finance
+    keywords: [accounts payable, accounts receivable, ar collections, ar manager, payroll,
+               accountant, accounting, financial, finance, fp&a, tax, billing, controller,
+               risk and internal controls, payment]
+
+  - department: Sales
+    keywords: [sales, business development, gtm, revenue operations, partner account,
+               partner management, enablement]
+
+  - department: E-Commerce & Merchandising
+    keywords: [e-commerce, ecommerce, merchandis, store, gift card, order management]
+
+  - department: Procurement & Supply Chain
+    keywords: [buyer, supply chain, procurement, sourcing, demand plan, category manag,
+               vendor, supplier]
+
+  - department: Marketing
+    keywords: [marketing, brand, creative, art director, copywrit, content, paid media,
+               media relations, demand generation, communications, event, speaker, video,
+               graphic, multimedia, presentation, production artist, thought leadership,
+               campaign, digital experience]
+
+  - department: Data & Analytics
+    keywords: [analytics, bi analyst, business analyst, data analyst, insight]
+
+  - department: IT & Security
+    keywords: [helpdesk, end user services, it security, it infrastructure, network engineer,
+               security engineer, security analyst, information security]
+
+  - department: Product
+    keywords: [product design, product manag, product research, product strategy,
+               product advocate, product solutions, ux, designer]
+
+  - department: Engineering
+    keywords: [engineer, developer, architect, qa, software, machine learning, nlp,
+               data scien, research scientist, technolog, release manager,
+               technical project, performance test, bos, back office, infrastructure]
+
+  - department: Consulting
+    keywords: [consult, practice leader]
+
+  - department: Program Management
+    keywords: [program manag]
+
+  - department: Executive Office
+    keywords: [executive assistant, chief of staff, strategic planning, strategic projects, gm]

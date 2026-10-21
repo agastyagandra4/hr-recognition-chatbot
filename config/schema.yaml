@@ -1,0 +1,9 @@
+columns:
+  message: message
+  award_title: award_title
+  receiver_title: recipient_title
+  giver_title: nominator_title
+  category_id: category_id
+  category_name: category_name
+  subcategory_id: subcategory_id
+  subcategory_name: subcategory_name
