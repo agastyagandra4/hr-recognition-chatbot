@@ -1,0 +1,35 @@
+# What happens for each label the input guard assigns.
+# action: proceed = send to the agent; refuse = reply with the message below.
+# HR or legal can edit these messages without changing any code.
+
+labels:
+  in_scope:
+    action: proceed
+
+  off_topic:
+    action: refuse
+    message: >
+      I can only help with questions about employee recognition data, such as which
+      departments are recognized most, what people are recognized for, example messages,
+      or how teams are connected.
+
+  individual_judgment:
+    action: refuse
+    message: >
+      I can't evaluate individual employees. Recognition data reflects what colleagues
+      chose to celebrate, not a full picture of anyone's performance. I can show
+      patterns at the team or role level instead.
+
+  protected_attribute:
+    action: refuse
+    message: >
+      I don't analyze recognition by gender, race, age, or other protected
+      characteristics. The data doesn't contain them, and I won't infer them from
+      names or job titles.
+
+  workforce_decision:
+    action: refuse
+    message: >
+      Recognition patterns shouldn't be the basis for promotion, pay, or termination
+      decisions. I can share team-level recognition patterns as one input to a
+      broader conversation.

@@ -42,7 +42,9 @@ while True:
         new_messages.append(message)
     tools_used = [call["name"] for m in reversed(new_messages)
                   if isinstance(m, AIMessage) for call in m.tool_calls]
-
+    label = result.get("guard_label", "in_scope")
+    if label != "in_scope":
+        print(f"  (guardrail: {label})")
     if tools_used:
         print(f"  (tools used: {', '.join(tools_used)})")
     print(f"Bot: {result['messages'][-1].content}\n")
