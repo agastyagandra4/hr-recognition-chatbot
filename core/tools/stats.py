@@ -55,24 +55,35 @@ def recognitions_by_department(direction="received"):
 
 
 def category_breakdown(department=None):
-    """Recognitions per category and subcategory, optionally for one receiving department."""
-    sql = """
-        SELECT category_name, subcategory_name, COUNT(*) AS recognitions
-        FROM recognitions
-    """
+    """Recognitions per category and subcategory, optionally for one receiving department.
+    Also lists subcategories with zero records, so 'none' answers are visible."""
+    join_condition = "r.subcategory_id = t.subcategory_id"
     params = ()
     if department:
-        sql += " WHERE receiver_department = ?"
+        join_condition += " AND r.receiver_department = ?"
         params = (department,)
-    sql += " GROUP BY category_name, subcategory_name ORDER BY recognitions DESC"
 
-    table = run_query(sql, params)
-    if table.empty:
+    table = run_query(
+        f"""
+        SELECT t.category_name, t.subcategory_name, COUNT(r.record_id) AS recognitions
+        FROM taxonomy t
+        LEFT JOIN recognitions r ON {join_condition}
+        GROUP BY t.category_name, t.subcategory_name
+        ORDER BY recognitions DESC
+        """,
+        params,
+    )
+
+    total = int(table["recognitions"].sum())
+    if total == 0:
         return {"error": f"No records found for department '{department}'"}
-    return {"department": department or "all", "total": int(table["recognitions"].sum()),
-            "results": table.to_dict("records")}
 
-
+    return {
+        "department": department or "all",
+        "total": total,
+        "results": table[table["recognitions"] > 0].to_dict("records"),
+        "subcategories_with_no_records": table[table["recognitions"] == 0]["subcategory_name"].tolist(),
+    }
 def department_flows(limit=10):
     """The strongest giver-department -> receiver-department pairs, across departments only."""
     table = run_query(
